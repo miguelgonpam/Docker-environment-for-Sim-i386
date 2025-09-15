@@ -38,4 +38,11 @@ RUN git clone https://github.com/richfelker/musl-cross-make && git clone https:/
 
 WORKDIR /home/dev/musl-cross-make
 
-RUN echo -e "TARGET = i386-linux-musl\nOUTPUT = /home/dev/utils\nCOMMON_CONFIG += --disable-nls" > config.mak && sudo make && sudo make install
+
+RUN echo "TARGET=i386-linux-musl" > config.mak
+RUN echo "OUTPUT=/home/dev/utils" >> config.mak
+RUN echo "COMMON_CONFIG+=--disable-nls" >> config.mak
+
+RUN cat -A config.mak
+RUN make
+RUN sudo make install
